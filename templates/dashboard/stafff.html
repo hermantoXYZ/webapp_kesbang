@@ -1,0 +1,97 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Dashboard Pelanggan{% endblock %}
+{% block content %}
+{% load static %}
+        <main class="main-content">
+            <header class="main-header">
+                <div class="breadcrumb">
+                    <span>Pages / Dashboard</span>
+                </div>
+                <div class="header-right">
+                    <a href="/" class="btn-add"><i class="fas fa-edit"></i>Create</a>
+                    <a href="#" class="bar-icon"><i class="fas fa-bars sidebar-toggle" style="color: #704f4f;"></i></a>
+                </div>
+            </header>
+            <section class="main-section">
+                <div class="info-container">
+                    <div class="info-card">
+                        <div class="info-content">
+                            <p class="info-title">Total Undanganku</p>
+                            <h2><span class="info-change positive">+</span></h2>
+                        </div>
+                        <div class="info-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-content">
+                            <p class="info-title">Total Tamu</p>
+                            <h2>+</h2>
+                        </div>
+                        <div class="info-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-content">
+                            <p class="info-title">Ucapan & Do'a</p>
+                            <h2>+</h2>
+                        </div>
+                        <div class="info-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-content">
+                            <p class="info-title">Sisa Kouta Undangan</p>
+                            <h2></h2>
+                        </div>
+                        <div class="info-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                </div>
+    {% for invitation in invitations %}
+    {% empty %}
+    <div class="message error">
+        Hari spesial semakin dekat! Segera buat undangan Anda dan persiapkan momen tak terlupakan
+    </div>
+    {% endfor %}
+                <div class="container">
+                    <div class="card">
+                        <div class="card-content">
+                            <p class="tag">Ungkapan Bijak</p>
+                            <h2>Undanganku</h2>
+                            <p>Jangan tunda kebahagiaan. Buat undangan Anda sekarang dan bagikan kebahagiaan Anda</p>
+                            <div class="read-more">
+                                <a href=""><i class="fas fa-share"></i> Share Invitation</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <!-- Card Tamu Undangan -->
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="chart-container">
+                                <canvas id="myChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal Tamu Undangan -->
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'js/dashboard/ChartStatistik.js' %}?v={{ STATIC_VERSION }}"></script>
+    <script>
+        var chartData = {
+            invitationsCount: {{ invitations_count }},
+            tamuUndanganCount: {{ tamu_undangan_count }},
+            rsvpCount: {{ rsvp_count }},
+            kuotaUndanganSisa: {{ kuota_undangan_sisa }}
+        };
+    </script>
+{% endblock %}
+</body>
+</html>

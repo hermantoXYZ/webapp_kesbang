@@ -1,0 +1,11 @@
+<!-- skt/templates/skt/create_register.html -->
+<h1>Create SKT Form</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ register_form.as_p }}
+    {{ pemohon_form.as_p }}
+    {{ organisasi_form.as_p }}
+    {{ pengurus_form.as_p }}
+    {{ dokumen_form.as_p }}
+    <button type="submit">Submit</button>
+</form>

@@ -1,0 +1,88 @@
+{% extends 'dashboard/base_form.html' %}
+{%block title%}Login User{%endblock%}
+{%block content%}
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="service-container-form">
+    <div class="tabs">
+        <a href="{% url 'edit_pemohon' register_id=register_id %}" class="tab active">Pemohon</a>
+        <a href="{% url 'edit_organisasi' register_id=register_id %}" class="tab">Organisasi</a>
+        <a href="{% url 'edit_pengurus' register_id=register_id %}" class="tab">Pengurus</a>
+        <a href="{% url 'edit_dokumen' register_id=register_id %}" class="tab">Dokumen</a>
+        <a href="{% url 'resume_page' register_id=register_id %}" class="tab">Resume</a> 
+    </div>
+
+    <h2 style="text-align: left;">Data Pemohon</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.nama_lengkap.id_for_label }}">Nama Lengkap</label>
+            {{ pemohon_form.nama_lengkap }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.nik.id_for_label }}">NIK</label>
+            {{ pemohon_form.nik }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.jenis_kelamin.id_for_label }}">Jenis Kelamin</label>
+            {{ pemohon_form.jenis_kelamin }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.alamat.id_for_label }}">Alamat</label>
+            {{ pemohon_form.alamat }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.tempat_tanggal_lahir.id_for_label }}">Tempat dan Tanggal Lahir</label>
+            {{ pemohon_form.tempat_tanggal_lahir }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.tanggal_lahir_pemohon.id_for_label }}">Tanggal Lahir</label>
+            {{ pemohon_form.tanggal_lahir_pemohon }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.pekerjaan.id_for_label }}">Pekerjaan</label>
+            {{ pemohon_form.pekerjaan }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.no_wa.id_for_label }}">No WA</label>
+            {{ pemohon_form.no_wa }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.email.id_for_label }}">Email</label>
+            {{ pemohon_form.email }}
+        </div>
+        <div class="form-group">
+            <label for="{{ pemohon_form.surat_permohonan_skt.id_for_label }}">Surat Permohonan SKT</label>
+            
+            <!-- Tombol untuk unggah file -->
+            <input type="file" id="{{ pemohon_form.surat_permohonan_skt.id_for_label }}" name="{{ pemohon_form.surat_permohonan_skt.name }}" style="display: none;">
+            <button type="button" class="btn upload" onclick="document.getElementById('{{ pemohon_form.surat_permohonan_skt.id_for_label }}').click();">
+                Unggah <i class="fas fa-upload"></i>
+            </button>
+        
+            <!-- Tombol untuk melihat dokumen yang diunggah -->
+            {% if pemohon_form.instance.surat_permohonan_skt %}
+                <button type="button" class="btn view" onclick="window.open('{{ pemohon_form.instance.surat_permohonan_skt.url }}', '_blank');">
+                    Lihat <i class="fas fa-eye"></i>
+                </button>
+            {% endif %}
+        </div>
+        
+        
+        <div class="form-group">
+            <label for="{{ form.nomor_surat.id_for_label }}">Nomor Surat</label>
+            {{ pemohon_form.nomor_surat }}
+        </div>
+
+        <button type="submit" class="submit-button" >Submit dan Lanjutkan</button>
+    </form>
+</div>
+{%endblock%}

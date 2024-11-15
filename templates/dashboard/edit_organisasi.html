@@ -1,0 +1,140 @@
+{% extends 'dashboard/base_form.html' %}
+{%block title%}Login User{%endblock%}
+{%block content%}
+<!-- <div class="service-container-password">
+    <div class="status-indicators">
+        <span class="red"></span>
+        <span class="yellow"></span>
+        <span class="green"></span>
+    </div>
+</div> -->
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="service-container-form">
+    <div class="tabs">
+        <a href="{% url 'edit_pemohon' register_id=register_id %}" class="tab">Pemohon</a>
+        <a href="{% url 'edit_organisasi' register_id=register_id %}" class="tab active">Organisasi</a>
+        <a href="{% url 'edit_pengurus' register_id=register_id %}" class="tab">Pengurus</a>
+        <a href="{% url 'edit_dokumen' register_id=register_id %}" class="tab">Dokumen</a>
+        <a href="{% url 'resume_page' register_id=register_id %}" class="tab">Resume</a> 
+    </div>
+    <h2 style="text-align: left;">Data Pemohon</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.nama_notaris.id_for_label }}">Nama Notaris</label>
+            {{ organisasi_form.nama_notaris }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.nomor_akta.id_for_label }}">Nomor Akta</label>
+            {{ organisasi_form.nomor_akta }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.tanggal_akta.id_for_label }}">Tanggal Akta</label>
+            {{ organisasi_form.tanggal_akta }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.nama_organisasi.id_for_label }}">Nama Organisasi</label>
+            {{ organisasi_form.nama_organisasi }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.bidang_kegiatan.id_for_label }}">Bidang Kegiatan</label>
+            {{ organisasi_form.bidang_kegiatan }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.alamat_kantor.id_for_label }}">Alamat Kantor</label>
+            {{ organisasi_form.alamat_kantor }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.tempat_pendirian.id_for_label }}">Tempat Pendirian</label>
+            {{ organisasi_form.tempat_pendirian }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.tanggal_pendirian.id_for_label }}">Tanggal Pendirian</label>
+            {{ organisasi_form.tanggal_pendirian }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.asas_ciri_organisasi.id_for_label }}">Asas Ciri Organisasi</label>
+            {{ organisasi_form.asas_ciri_organisasi }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.tujuan_organisasi.id_for_label }}">Tujuan Organisasi</label>
+            {{ organisasi_form.tujuan_organisasi }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.masa_bakti_kepengurusan.id_for_label }}">Masa Bakti Kepengurusan</label>
+            {{ organisasi_form.masa_bakti_kepengurusan }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.keputusan_tertinggi_organisasi.id_for_label }}">Keputusan Tertinggi Organisasi</label>
+            {{ organisasi_form.keputusan_tertinggi_organisasi }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.unit_cabang.id_for_label }}">Unit Cabang</label>
+            {{ organisasi_form.unit_cabang }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.npwp.id_for_label }}">NPWP</label>
+            {{ organisasi_form.npwp }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.sumber_keuangan.id_for_label }}">Sumber Keuangan</label>
+            {{ organisasi_form.sumber_keuangan }}
+        </div>
+
+
+        <div class="form-group">
+            <label for="{{ organisasi_form.lambang_logo.id_for_label }}">Lambang Logo</label>
+            
+            <!-- Tombol untuk unggah file -->
+            <input type="file" id="{{ organisasi_form.lambang_logo.id_for_label }}" name="{{ organisasi_form.lambang_logo.name }}" style="display: none;">
+            <button type="button" class="btn upload" onclick="document.getElementById('{{ organisasi_form.lambang_logo.id_for_label }}').click();">
+                Unggah <i class="fas fa-upload"></i>
+            </button>
+        
+            <!-- Tombol untuk melihat dokumen yang diunggah -->
+            {% if organisasi_form.instance.lambang_logo %}
+                <button type="button" class="btn view" onclick="window.open('{{ organisasi_form.instance.lambang_logo.url }}', '_blank');">
+                    Lihat <i class="fas fa-eye"></i>
+                </button>
+            {% endif %}
+        </div>
+
+
+        <div class="form-group">
+            <label for="{{ organisasi_form.bendera.id_for_label }}">Lambang Logo</label>
+            
+            <!-- Tombol untuk unggah file -->
+            <input type="file" id="{{ organisasi_form.bendera.id_for_label }}" name="{{ organisasi_form.bendera.name }}" style="display: none;">
+            <button type="button" class="btn upload" onclick="document.getElementById('{{ organisasi_form.bendera.id_for_label }}').click();">
+                Unggah <i class="fas fa-upload"></i>
+            </button>
+        
+            <!-- Tombol untuk melihat dokumen yang diunggah -->
+            {% if organisasi_form.instance.bendera %}
+                <button type="button" class="btn view" onclick="window.open('{{ organisasi_form.instance.bendera.url }}', '_blank');">
+                    Lihat <i class="fas fa-eye"></i>
+                </button>
+            {% endif %}
+        </div>
+        <button type="submit" class="submit-button" >Submit dan Lanjutkan</button>
+    </form>
+    {% if messages %}
+            <div class="alert alert-info">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+</div>
+{%endblock%}

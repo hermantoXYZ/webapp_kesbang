@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+     <!-- Start Meta Tag -->
+     <meta name="title" content="Undangan Digital Terpopuler dan Terpercaya - Inviteku">
+     <meta name="description" content="Inviteku.com adalah situs undangan digital terpopuler dan terpercaya di Indonesia. Temukan berbagai pilihan undangan digital yang elegan dan mudah digunakan.">
+     <meta name="keywords" content="undangan digital, undangan online, undangan elektronik, Inviteku, undangan terpopuler, undangan terpercaya, undangan elegan">
+     <!-- Facebook -->
+     <meta property="og:title" content="Undangan Digital Terpopuler dan Terpercaya - Inviteku">
+     <meta property="og:description" content="Inviteku.com adalah situs undangan digital terpopuler dan terpercaya di Indonesia. Temukan berbagai pilihan undangan digital yang elegan dan mudah digunakan.">
+     <meta property="og:image" content="https://www.inviteku.com/media/assets/inviteku.png">
+     <meta property="og:url" content="https://www.inviteku.com">
+     <!-- Twitter -->
+     <meta name="twitter:card" content="summary_large_image">
+     <meta name="twitter:title" content="Undangan Digital Terpopuler dan Terpercaya - Inviteku">
+     <meta name="twitter:description" content="Inviteku.com adalah situs undangan digital terpopuler dan terpercaya di Indonesia. Temukan berbagai pilihan undangan digital yang elegan dan mudah digunakan.">
+     <meta name="twitter:image" content="https://www.inviteku.com/media/assets/inviteku.png">
+     <!-- End Meta Tag -->
+    <link rel="stylesheet" href="{% static 'home/styles.css' %}?v={{ STATIC_VERSION }}"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/media/logo/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/media/logo/favicon/favicon-16x16.png"/>
+</head>
+<body>
+    <!-- <div class="announcement-bar">
+        <div class="announcement-inner">
+            <p class="paragraph-small">Dapatkan paket Undangan digital yang menarik dan kekinian</p>
+        </div>
+    </div> -->
+<!-- Navbar Home -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="logo">
+                <img src="/media/logo/logoipsum-325.svg" alt="Logo">
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link">Beranda</a></li>
+                <li class="nav-item"><a href="{% url 'create_register' %}" class="nav-link">Penerbitan SKT Baru</a></li>
+                <li class="nav-item"><a href="/" class="nav-link">Lainnya</a></li>
+            </li>
+            </ul>
+            <div class="auth-buttons">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'dashboard_pelanggan' %}" class="btn dashboard">Dashboard</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn login">Login</a>
+                    <a href="{% url 'register' %}" class="btn register">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+<!-- Navbar Home -->
+{% block content %}
+{% endblock %}
+<!-- Footer -->
+<div class="whatsapp-float">
+    <a href="https://api.whatsapp.com/send/?phone=628289512402404&text=Halo+Kak+Handini%0ASaya+mau+buat+undangan+digital" target="_blank">
+        <img src="/media/logo/favicon/WhatsApp_icon.png" alt="Chat Admin">
+        <span class="notification-dot"></span> <!-- Dot Merah -->
+    </a>
+</div>
+
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-left">
+            <div class="logo">
+                <img src="https://cameramate.co.uk/wp-content/uploads/2023/09/logoipsum-logo-1-1.png" alt="Invitekucom">
+            </div>
+            <p>Kantor Badan Kesatuan Bangsan dan Politik dalam Negeri Kab. Teluk Bintuni</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-right">
+            <div class="footer-column">
+                <h3>Pages</h3>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="/">Team</a></li>
+                    <li><a href="/">Kebijakan</a></li>
+                    <li><a href="/">Blog Article</a></li>
+                    <li><a href="/">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="{% url 'password_reset' %}">Forgot Password</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>Copyright © All rights reserved.</p>
+    </div>
+</footer>
+<script src="{% static '/js/home/NavMenu.js' %}?v={{ STATIC_VERSION }}"></script>
+<script src="{% static '/js/dashboard/ModalEdit.js' %}?v={{ STATIC_VERSION }}"></script>
+<script src="{% static '/js/home/PageAudioFilter.js' %}?v={{ STATIC_VERSION }}"></script>
+<script src="{% static '/js/home/CopyLink.js' %}?v={{ STATIC_VERSION }}"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{% extends 'home/base.html' %}
+{% block content %}
+{% load humanize %}
+    <div class="brand-title-wrapper">
+        <h5>Kuota undangan paket "{{ package_name|upper }}" sudah penuh, maksimal {{ max_invitation }} undangan</h5>
+    </div>
+    <p style="text-align: center;">Silahkan upgrade paket Anda atau <a href="{% url 'card_list' %}" style="color: #000000;">Edit undangan</a>  yang tersedia atau pesan pakut baru <a href="{% url 'pricing_list' %}" style="background-color: #c2ff66; padding: 7px; border-radius: 5px; text-decoration: none; color: #000; line-height: 2;">Klik disini</a></p>
+{% endblock %}

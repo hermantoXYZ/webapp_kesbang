@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Start Meta Tag -->
+    <meta name="title" content="Undangan Digital Terpopuler dan Terpercaya - Inviteku">
+    <meta name="description" content="Inviteku.com adalah situs undangan digital terpopuler dan terpercaya di Indonesia. Temukan berbagai pilihan undangan digital yang elegan dan mudah digunakan.">
+    <meta name="keywords" content="undangan digital, undangan online, undangan elektronik, Inviteku, undangan terpopuler, undangan terpercaya, undangan elegan">
+    <!-- Facebook -->
+    <meta property="og:title" content="Undangan Digital Terpopuler dan Terpercaya - Inviteku">
+    <meta property="og:description" content="Inviteku.com adalah situs undangan digital terpopuler dan terpercaya di Indonesia. Temukan berbagai pilihan undangan digital yang elegan dan mudah digunakan.">
+    <meta property="og:image" content="URL_GAMBAR_THUMBNAIL">
+    <meta property="og:url" content="https://www.inviteku.com">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Undangan Digital Terpopuler dan Terpercaya - Inviteku">
+    <meta name="twitter:description" content="Inviteku.com adalah situs undangan digital terpopuler dan terpercaya di Indonesia. Temukan berbagai pilihan undangan digital yang elegan dan mudah digunakan.">
+    <meta name="twitter:image" content="URL_GAMBAR_THUMBNAIL">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v={{ STATIC_VERSION }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="/media/logo/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/media/logo/favicon/favicon-16x16.png"/>
+</head>
+<body>
+    <header>
+        <a href="{% url 'pemohon' %}">
+        <img src="{{ MEDIA_URL }}logo/invite-white.png" alt="Logo">
+        </a>    
+      </header>
+{%block content%}
+{%endblock%}
+</body>
+</html>

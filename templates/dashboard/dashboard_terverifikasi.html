@@ -1,0 +1,125 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Daftar Dokumen Terverifikasi{% endblock %}
+{% load static %}
+{% block content %}
+<main class="main-content">
+<!-- Start Header Section List Undangan -->
+<header class="main-header">
+    <div class="breadcrumb">
+        <span>Pages / Dashboard</span>
+    </div>
+    <div class="header-right">
+      <!-- <a href="{% url 'create_register' %}" class="btn-add"><i class="fas fa-edit"></i>Ajuk SKT</a> -->
+      <a href="#" class="bar-icon"><i class="fas fa-bars sidebar-toggle" style="color: #704f4f;"></i></a>
+    </div>
+</header>
+<!-- End Header Section List Undangan -->
+<section class="main-section">
+<!-- Start Info Container -->
+    <div class="info-container">
+        <div class="info-card">
+            <div class="info-content">
+                <p class="info-title">Jumlah Pengajuan SKT</p>
+                <h2><span class="info-change positive">+{{ total_pengajuan }}</span></h2>
+            </div>
+            <div class="info-icon">
+                <i class="fas fa-wallet"></i>
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="info-content">
+                <p class="info-title">Approved</p>
+                <h2>+{{ total_verified }}</h2>
+            </div>
+            <div class="info-icon">
+                <i class="fas fa-globe"></i>
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="info-content">
+                <p class="info-title">Belum Terverifikasi</p>
+                <h2>+{{ unverified_completed_count }}</h2>
+            </div>
+            <div class="info-icon">
+                <i class="fas fa-users"></i>
+            </div>
+        </div>
+    </div>
+    <form method="GET" action="{% url 'dashboard_terverifikasi' %}" class="search-form">
+      <input 
+          type="text" 
+          name="q" 
+          placeholder="Cari organisasi atau register..." 
+          value="{{ query }}" 
+          aria-label="Search"
+      >
+      <button type="submit" aria-label="Cari">
+          <i class="fas fa-search"></i> Cari
+      </button>
+    </form>
+    {% if results %}
+    <div class="categories-list-undangan">
+      {% for register in results %}
+      <div class="category-list-undangan">
+        <img src="{{ register.logo.url }}" alt="">
+        <div class="category-text">
+          <h3>{{ register.nama_organisasi }}</h3>
+          <p>Nomor Register System: {{ register.register }}</p>
+          <p> {{ register.created_at|date:"Y-m-d H:i" }} | 
+            {% if register.is_verified %}
+            <span class="status-approved">Terverifikasi</span>
+            {% else %}
+            <span class="status-pending">Belum Terverifikasi</span>
+            {% endif %}
+          </p> 
+        </div>
+        <div class="menu-list-undangan">
+          <i class="fas fa-ellipsis-v menu-icon" onclick="toggleModal('modal{{ register.id }}')"></i>
+          <div id="modal{{ register.id }}" class="modal">
+            <ul>
+              <a href="{% url 'edit_pemohon' register.id %}">
+                <li><i class="fas fa-edit"></i> Edit Formulir</li>
+            </a>
+            </ul>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    {% else %}
+    <div class="message error"> Pengajuan Belum Terverifikasi</div>
+    </div>
+    {% endif %}
+    
+<!-- 
+  <div class="categories-list-undangan">
+            {% for register in registers %}
+            <div class="category-list-undangan">
+              <img src="{{ register.logo.url }}" alt="">
+              <div class="category-text">
+                <h3>{{ register.nama_organisasi }}</h3>
+                <p>Nomor Register System: {{ register.register }}</p>
+                <p>{{ register.created_at }}</p>
+              </div>
+              <div class="menu-list-undangan">
+                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleModal('modal{{ register.id }}')"></i>
+                <div id="modal{{ register.id }}" class="modal">
+                  <ul>
+                    <a href="{% url 'edit_pemohon' register.id %}">
+                      <li><i class="fas fa-edit"></i> Edit Formulir</li>
+                  </a>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+  </div> -->
+  <!-- End Section List Undangan -->
+</div>
+<!-- End Container List Undangan -->
+</section>
+</main>
+</div>
+<script src="{% static '/js/Modal.js' %}?v={{ STATIC_VERSION }}"></script>
+{% endblock %}
+</body>
+</html>

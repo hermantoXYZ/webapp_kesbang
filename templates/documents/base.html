@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+<title>{% block title %}{% endblock %}</title>
+<meta name="title" content="Undangan Digital Terpopuler dan Terpercaya - Inviteku">
+<meta name="description" content="Inviteku.com adalah situs undangan digital terpopuler dan terpercaya di Indonesia. Temukan berbagai pilihan undangan digital yang elegan dan mudah digunakan.">
+<meta name="keywords" content="undangan digital, undangan online, undangan elektronik, Inviteku, undangan terpopuler, undangan terpercaya, undangan elegan">
+<!-- Facebook -->
+<meta property="og:title" content="Undangan Digital Terpopuler dan Terpercaya - Inviteku">
+<meta property="og:description" content="Inviteku.com adalah situs undangan digital terpopuler dan terpercaya di Indonesia. Temukan berbagai pilihan undangan digital yang elegan dan mudah digunakan.">
+<meta property="og:image" content="https://www.inviteku.com/media/assets/inviteku.png">
+<meta property="og:url" content="https://www.inviteku.com">
+<meta name="author" content="inviteku.com">
+<link rel="icon" type="image/png" sizes="32x32" href="/media/logo/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/media/logo/favicon/favicon-16x16.png"/>
+<!-- Stylesheet
+============================== -->
+<link rel="stylesheet" type="text/css" href="{% static '/docs/css/bootstrap.min.css' %}?v={{ STATIC_VERSION }}"/>
+<link rel="stylesheet" type="text/css" href="{% static '/docs/css/magnific-popup.min.css' %}?v={{ STATIC_VERSION }}"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<link rel="stylesheet" type="text/css" href="{% static '/docs/css/stylesheet.css' %}?v={{ STATIC_VERSION }}"/>
+</head>
+<body class="box" data-spy="scroll" data-target=".idocs-navigation" data-offset="125">
+<div class="preloader">
+  <div class="lds-ellipsis">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+<div id="main-wrapper"> 
+  <header id="header" class="sticky-top"> 
+    <nav class="primary-menu navbar navbar-expand-lg navbar-dropdown-dark">
+      <div class="container-fluid">
+		<button id="sidebarCollapse" class="navbar-toggler d-block d-md-none" type="button"><span></span><span class="w-75"></span><span class="w-50"></span></span></button>
+        <a class="logo ml-md-3" href="index.html" title="iDocs Template"> <img src="/media/assets/logo.png" alt="iDocs Template"/> </a> 
+		<span class="text-2 ml-2">v1.0</span> 
+		<button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#header-nav"><span></span><span></span><span></span></button> 
+		<div id="header-nav" class="collapse navbar-collapse justify-content-end">
+          <ul class="navbar-nav">
+            <li class="dropdown"> <a class="dropdown-toggle" href="#">Dropdown</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Dropdown Action</a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/">Action</a></li>
+                    <li><a class="dropdown-item" href="/">Another Action</a></li>
+                    <li><a class="dropdown-item" href="/">Something Else Here</a></li>
+                  </ul>
+                </li>
+                <li><a class="dropdown-item" href="#">Another Action</a>
+                <li><a class="dropdown-item" href="#">Something Else Here</a></li>
+              </ul>
+            </li>
+            <li><a target="_blank" href="/contact/">Kontak</a></li>
+            <li><a target="_blank" href="/team/">Support</a></li>
+          </ul>
+        </div>
+        <ul class="social-icons social-icons-sm ml-lg-2 mr-2">
+            <li class="social-icons-twitter"><a data-toggle="tooltip" href="http://www.twitter.com/hermantoXYZ/" target="_blank" title="" data-original-title="Twitter"><i class="fab fa-twitter"></i></a></li>
+            <li class="social-icons-facebook"><a data-toggle="tooltip" href="http://www.facebook.com/hermanto.xyz/" target="_blank" title="" data-original-title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+            <li class="social-icons-github"><a data-toggle="tooltip" href="https://github.com/hermantoXYZ" target="_blank" title="" data-original-title="github"><i class="fab fa-github"></i></a></li>
+          </ul>
+      </div>
+    </nav>
+  </header>
+{% block content %}
+{% endblock %}
+<a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a> 
+<script src="{% static '/docs/js/jquery.min.js' %}?v={{ STATIC_VERSION }}"></script>
+<script src="{% static '/docs/js/bootstrap.bundle.min.js' %}?v={{ STATIC_VERSION }}"></script>
+<script src="{% static '/docs/js/highlight.min.js' %}?v={{ STATIC_VERSION }}"></script>
+<script src="{% static '/docs/js/jquery.easing.min.js' %}?v={{ STATIC_VERSION }}"></script>
+<script src="{% static '/docs/js/jquery.magnific-popup.min.js' %}?v={{ STATIC_VERSION }}"></script>
+<script src="{% static '/docs/js/theme.js' %}?v={{ STATIC_VERSION }}"></script>
+</body>
+</html>

@@ -1,0 +1,781 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}List Pengajuan SKT{% endblock %}
+{% load static %}
+{% block content %}
+<main class="main-content">
+<header class="main-header">
+    <div class="breadcrumb">
+        <span>Pages / Dashboard</span>
+    </div>
+    <div class="header-right">
+      <!-- <a href="{% url 'create_register' %}" class="btn-add"><i class="fas fa-edit"></i>Ajuk SKT</a> -->
+      <a href="#" class="bar-icon"><i class="fas fa-bars sidebar-toggle" style="color: #704f4f;"></i></a>
+    </div>
+</header>
+<section class="main-section">
+    <div class="info-container">
+        <div class="info-card">
+            <div class="info-content">
+                <p class="info-title"> {{ register.register }}</p>
+                <h2><span class="info-change positive">RegisterID | {{register.author|upper}} </span></h2>
+            </div>
+            <div class="info-icon">
+                <i class="fas fa-wallet"></i>
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="info-content">
+                <p class="info-title">Nama Organisasi</p>
+                <h2>{{ register.nama_organisasi }}</h2>
+            </div>
+            <div class="info-icon">
+                <i class="fas fa-users"></i>
+            </div>
+        </div>
+    </div>
+    {% if messages and request.method == "POST" %}
+    <div class="message success">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+    <div class="message warning"> Pemohon Details</div>
+    <div class="form-section">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Nama Lengkap</label>
+                <p style="font-size: large; color: black;">{{ pemohon.nama_lengkap }}</p>
+            </div>
+            <div class="form-group">
+                <label>NIK</label>
+                <p style="font-size: large; color: black;"> {{ pemohon.nik }}</p>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Jenis Kelamin</label>
+                <p style="font-size: large; color: black;">{{ pemohon.jenis_kelamin }}</p>
+            </div>
+            <div class="form-group">
+                <label>Alamat</label>
+                <p style="font-size: large; color: black;"> {{ pemohon.alamat }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Alamat</label>
+            <p style="font-size: large; color: black;">{{ pemohon.alamat }}</p>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Tempat Lahir</label>
+                <p style="font-size: large; color: black;">{{ pemohon.tempat_tanggal_lahir }}</p>
+            </div>
+            <div class="form-group">
+                <label>Tanggal Lahir Pemohon</label>
+                <p style="font-size: large; color: black;"> {{ pemohon.tanggal_lahir_pemohon }}</p>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Pekerjaan</label>
+                <p style="font-size: large; color: black;">{{ pemohon.pekerjaan }}</p>
+            </div>
+            <div class="form-group">
+                <label>No WA</label>
+                <p style="font-size: large; color: black;"> {{ pemohon.no_wa }}</p>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Email</label>
+                <p style="font-size: large; color: black;">{{ pemohon.email }}</p>
+            </div>
+            <div class="form-group">
+                <label>Surat Permohonan</label>
+                <td>
+                    {% if surat_permohonan_skt %}
+                    <button type="button" class="btn view" onclick="window.open('{{ surat_permohonan_skt.url }}', '_blank');">
+                    Lihat <i class="fas fa-eye"></i>
+                    </button>
+                    {% else %}
+                    <p style="text-align: center;">Tidak Ada</p>
+                    {% endif %}
+                </td>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Nomor Surat Permohonan</label>
+            <p style="font-size: large; color: black;"> {{ pemohon.nomor_surat }}</p>
+        </div>
+    </div>
+    <div class="message warning"> Organisasi Details</div>
+    <div class="form-section">
+        <div class="form-group">
+            <label>Nama Lengkap Notaris</label>
+            <p style="font-size: large; color: black;">{{ organisasi.nama_notaris }}</p>
+        </div>
+        <div class="form-group">
+            <label>Nomor Akta</label>
+            <p style="font-size: large; color: black;">{{ organisasi.nomor_akta }}</p>
+        </div>  
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label>Tanggal Akta</label>
+            <p style="font-size: large; color: black;">{{ organisasi.tanggal_akta }}</p>
+        </div>
+        <div class="form-group">
+            <label>Nama Organisasi</label>
+            <p style="font-size: large; color: black;"> {{ organisasi.nama_organisasi }}</p>
+        </div>
+        <div class="form-group">
+            <label>Bidang Kegiatan</label>
+            <p style="font-size: large; color: black;">{{ organisasi.bidang_kegiatan }}</p>
+        </div>
+        <div class="form-group">
+            <label>Alamat Kantor</label>
+            <p style="font-size: large; color: black;"> {{ organisasi.alamat_kantor }}</p>
+        </div>
+        <div class="form-group">
+            <label>Tempat Pendirian</label>
+            <p style="font-size: large; color: black;">{{ organisasi.tempat_pendirian }}</p>
+        </div>  
+        <div class="form-group">
+            <label>Tanggal Pendirian</label>
+            <p style="font-size: large; color: black;">{{ organisasi.tanggal_pendirian }}</p>
+        </div>  
+    </div>
+    <div class="form-group">
+        <label>Asas Organisasi</label>
+        <p style="font-size: large; color: black;">{{ organisasi.asas_ciri_organisasi }}</p>
+    </div>
+    <div class="form-group">
+        <label>Tujuan Organisasi</label>
+        <p style="font-size: large; color: black;">{{ organisasi.tujuan_organisasi }}</p>
+    </div>
+    <div class="form-group">
+        <label>Masa Bakti Kepengurusan Organisasi</label>
+        <p style="font-size: large; color: black;">{{ organisasi.masa_bakti_kepengurusan }}</p>
+    </div>
+
+
+    <div class="form-row">
+        <div class="form-group">
+            <label>Keputusan Tertinggi Organisasi</label>
+            <p style="font-size: large; color: black;">{{ organisasi.keputusan_tertinggi_organisasi }}</p>
+        </div>
+        <div class="form-group">
+            <label>Unit Cabang</label>
+            <p style="font-size: large; color: black;"> {{ organisasi.unit_cabang }}</p>
+        </div>
+        <div class="form-group">
+            <label>NPWP</label>
+            <p style="font-size: large; color: black;"> {{ organisasi.npwp }}</p>
+        </div>
+        <div class="form-group">
+            <label>Sumber Keuangan</label>
+            <p style="font-size: large; color: black;"> {{ organisasi.sumber_keuangan }}</p>
+        </div>
+
+        <div class="form-group">
+            <label>Logo Organisasi</label>
+            <td>
+                {% if organisasi.lambang_logo %}
+                <button type="button" class="btn view" onclick="window.open('{{ organisasi.lambang_logo.url }}', '_blank');">
+                Lihat <i class="fas fa-eye"></i>
+                </button>
+                {% else %}
+                <p style="text-align: center;">Tidak Ada</p>
+                {% endif %}
+            </td>
+        </div>
+        
+        <div class="form-group">
+            <label>Bendera Organisasi</label>
+            <td>
+                {% if organisasi.bendera %}
+                <button type="button" class="btn view" onclick="window.open('{{ organisasi.bendera.url }}', '_blank');">
+                Lihat <i class="fas fa-eye"></i>
+                </button>
+                {% else %}
+                <p style="text-align: center;">Tidak Ada</p>
+                {% endif %}
+            </td>
+        </div>
+    </div>
+
+
+    <div class="message warning"> Pengurus Details</div>
+    <div class="form-section">
+        <div class="form-group">
+            <label>Nama Pembina</label>
+            <p style="font-size: large; color: black;">{{ pengurus.nama_pembina }}</p>
+        </div>
+        <div class="form-group">
+            <label>Nama Penasehat</label>
+            <p style="font-size: large; color: black;">{{ pengurus.nama_penasehat }}</p>
+        </div>  
+    </div>
+    <div class="message warning">Details Pendiri</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Nama Pendiri</label>
+                <p style="font-size: large; color: black;">{{ pengurus.nama_pendiri}} </p>
+            </div>
+            <div class="form-group">
+                <label>NIK</label>
+                <p style="font-size: large; color: black;">{{pengurus.nik_pendiri}}</p>
+            </div>
+            <div class="form-group">
+                <label>Agama</label>
+                <p style="font-size: large; color: black;">{{pengurus.agama_pendiri}}</p>
+            </div>
+            <div class="form-group">
+                <label>Jenis Kelamin</label>
+                <p style="font-size: large; color: black;">{{pengurus.jenis_kelamin_pendiri}}</p>
+            </div>
+            <div class="form-group">
+                <label>Tempat Lahir</label>
+                <p style="font-size: large; color: black;">{{pengurus.tempat_tanggal_lahir_pendiri}}</p>
+            </div>
+            <div class="form-group">
+                <label>Tempat & Tanggal Lahir</label>
+                <p style="font-size: large; color: black;">{{pengurus.tanggal_lahir_pendiri}}</p>
+            </div>
+            
+        </div>
+        <div class="form-group">
+            <label>Status Perkawinan</label>
+            <p style="font-size: large; color: black;">{{pengurus.status_perkawinan_pendiri}}</p>
+        </div>
+        <div class="form-group">
+            <label>Alamat</label>
+            <p style="font-size: large; color: black;">{{pengurus.alamat_pendiri}}</p>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>No Handphone</label>
+                <p style="font-size: large; color: black;">{{ pengurus.no_hp_pendiri}} </p>
+            </div>
+            <div class="form-group">
+                <label>Pekerjaan</label>
+                <p style="font-size: large; color: black;">{{ pengurus.pekerjaan_pendiri}} </p>
+            </div> 
+        </div>
+
+
+
+        <div class="message warning">Details Data Ketua</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Nama Pendiri</label>
+                <p style="font-size: large; color: black;">{{ pengurus.nama_ketua}} </p>
+            </div>
+            <div class="form-group">
+                <label>NIK</label>
+                <p style="font-size: large; color: black;">{{pengurus.nik_ketua}}</p>
+            </div>
+            <div class="form-group">
+                <label>Agama</label>
+                <p style="font-size: large; color: black;">{{pengurus.agama_ketua}}</p>
+            </div>
+            <div class="form-group">
+                <label>Jenis Kelamin</label>
+                <p style="font-size: large; color: black;">{{pengurus.jenis_kelamin_ketua}}</p>
+            </div>
+            <div class="form-group">
+                <label>Tempat Lahir</label>
+                <p style="font-size: large; color: black;">{{pengurus.tempat_tanggal_lahir_ketua}}</p>
+            </div>
+            <div class="form-group">
+                <label>Tempat & Tanggal Lahir</label>
+                <p style="font-size: large; color: black;">{{pengurus.tanggal_lahir_ketua}}</p>
+            </div>
+            
+        </div>
+        <div class="form-group">
+            <label>Status Perkawinan</label>
+            <p style="font-size: large; color: black;">{{pengurus.status_perkawinan_ketua}}</p>
+        </div>
+        <div class="form-group">
+            <label>Alamat</label>
+            <p style="font-size: large; color: black;">{{pengurus.alamat_ketua}}</p>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>No Handphone</label>
+                <p style="font-size: large; color: black;">{{ pengurus.no_hp_ketua}} </p>
+            </div>
+            <div class="form-group">
+                <label>Pekerjaan</label>
+                <p style="font-size: large; color: black;">{{ pengurus.pekerjaan_ketua}} </p>
+            </div> 
+        </div>
+
+
+        
+        <div class="message warning">Details Data Sekretaris</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Nama Pendiri</label>
+                <p style="font-size: large; color: black;">{{ pengurus.nama_sekretaris}} </p>
+            </div>
+            <div class="form-group">
+                <label>NIK</label>
+                <p style="font-size: large; color: black;">{{pengurus.nik_sekretaris}}</p>
+            </div>
+            <div class="form-group">
+                <label>Agama</label>
+                <p style="font-size: large; color: black;">{{pengurus.agama_sekretaris}}</p>
+            </div>
+            <div class="form-group">
+                <label>Jenis Kelamin</label>
+                <p style="font-size: large; color: black;">{{pengurus.jenis_kelamin_sekretaris}}</p>
+            </div>
+            <div class="form-group">
+                <label>Tempat Lahir</label>
+                <p style="font-size: large; color: black;">{{pengurus.tempat_tanggal_lahir_sekretaris}}</p>
+            </div>
+            <div class="form-group">
+                <label>Tempat & Tanggal Lahir</label>
+                <p style="font-size: large; color: black;">{{pengurus.tanggal_lahir_sekretaris}}</p>
+            </div>
+            
+        </div>
+        <div class="form-group">
+            <label>Status Perkawinan</label>
+            <p style="font-size: large; color: black;">{{pengurus.status_perkawinan_sekretaris}}</p>
+        </div>
+        <div class="form-group">
+            <label>Alamat</label>
+            <p style="font-size: large; color: black;">{{pengurus.alamat_sekretaris}}</p>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>No Handphone</label>
+                <p style="font-size: large; color: black;">{{ pengurus.no_hp_sekretaris}} </p>
+            </div>
+            <div class="form-group">
+                <label>Pekerjaan</label>
+                <p style="font-size: large; color: black;">{{ pengurus.pekerjaan_sekretaris}} </p>
+            </div> 
+        </div>
+
+
+
+        <div class="message warning">Details Data Bendahara</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Nama Pendiri</label>
+                <p style="font-size: large; color: black;">{{ pengurus.nama_bendahara}} </p>
+            </div>
+            <div class="form-group">
+                <label>NIK</label>
+                <p style="font-size: large; color: black;">{{pengurus.nik_bendahara}}</p>
+            </div>
+            <div class="form-group">
+                <label>Agama</label>
+                <p style="font-size: large; color: black;">{{pengurus.agama_bendahara}}</p>
+            </div>
+            <div class="form-group">
+                <label>Jenis Kelamin</label>
+                <p style="font-size: large; color: black;">{{pengurus.jenis_kelamin_bendahara}}</p>
+            </div>
+            <div class="form-group">
+                <label>Tempat Lahir</label>
+                <p style="font-size: large; color: black;">{{pengurus.tempat_tanggal_lahir_bendahara}}</p>
+            </div>
+            <div class="form-group">
+                <label>Tempat & Tanggal Lahir</label>
+                <p style="font-size: large; color: black;">{{pengurus.tanggal_lahir_bendahara}}</p>
+            </div>
+            
+        </div>
+        <div class="form-group">
+            <label>Status Perkawinan</label>
+            <p style="font-size: large; color: black;">{{pengurus.status_perkawinan_bendahara}}</p>
+        </div>
+        <div class="form-group">
+            <label>Alamat</label>
+            <p style="font-size: large; color: black;">{{pengurus.alamat_bendahara}}</p>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>No Handphone</label>
+                <p style="font-size: large; color: black;">{{ pengurus.no_hp_bendahara}} </p>
+            </div>
+            <div class="form-group">
+                <label>Pekerjaan</label>
+                <p style="font-size: large; color: black;">{{ pengurus.pekerjaan_bendahara}} </p>
+            </div> 
+        </div>
+
+        <table class="document-table">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Syarat Dokumen</th>
+                        <th>File</th>
+                    </tr>
+                </thead>
+                <tbody>
+               
+        
+    
+    
+                    <tr>
+                        <td>1</td>
+                        <td>
+                        <strong>Akta Notaris</strong><br>
+                        Salinan/fotocopy Akta Pendiri Ormas (dari Notaris) yang memuat Anggaran Dasar (AD) atau Anggaran Rumah Tangga (ART) </td>
+                        <td>
+                        {% if dokumen.akta_notaris %}
+                        <button type="button" class="btn view" onclick="window.open('{{ dokumen.akta_notaris.url }}', '_blank');">
+                        Lihat <i class="fas fa-eye"></i>
+                        </button>
+                        {% else %}
+                         <p style="text-align: center;">Tidak Ada</p>
+                        {% endif %}
+                        </td>
+                        </tr>
+    
+                        <tr>
+                            <td>2</td>
+                            <td>
+                            <strong>AD/ART</strong><br>
+                            Anggaran Dasar (AD), Anggaran Rumah Tangga (ART) (Memuat Paling Sedikit Nama Dan Lambang, Tempat Kedudukan, Asas Atau Tujuan, Dan Fungsi, Kepengurusan, Hak Dan Kewajiban Anggota, Pengelolaan Keuangan, Mekanisme Penyelesaian Sengketa Dan Pengawasan Internal, Dan Pembubaran Organisasi)
+                            </td>
+                            <td>
+                            {% if dokumen.ad_art %}
+                            <button type="button" class="btn view" onclick="window.open('{{ dokumen.ad_art.url }}', '_blank');">
+                            Lihat <i class="fas fa-eye"></i>
+                            </button>
+                            {% else %}
+                             <p style="text-align: center;">Tidak Ada</p>
+                            {% endif %}
+                            </td>
+                            </tr>
+    
+                        <tr>
+                            <td>3</td>
+                            <td>
+                            <strong>Program Kerja</strong><br>
+                            </td>
+                            <td>
+                            {% if dokumen.program_kerja %}
+                            <button type="button" class="btn view" onclick="window.open('{{ dokumen.program_kerja.url }}', '_blank');">
+                            Lihat <i class="fas fa-eye"></i>
+                            </button>
+                            {% else %}
+                             <p style="text-align: center;">Tidak Ada</p>
+                            {% endif %}
+                            </td>
+                        </tr>
+    
+                        <tr>
+                            <td>4</td>
+                            <td>
+                            <strong>Struktur Organisasi</strong><br>
+                            Susunan pengurus yang dibuktikan dengan surat keputusan tentang susunan pengurus ormas secara lengkap yang sah sesuai dengan AD/ART ormas yang memuat paling sedikit Ketua, Sekretaris dan Bendahara atau sebutan lain pengurus dan anggota kesemuanya berkewarganegaraan Indonesia tanpa terkecuali
+                            </td>
+                            <td>
+                            {% if dokumen.struktur_organisasi %}
+                            <button type="button" class="btn view" onclick="window.open('{{ dokumen.struktur_organisasi.url }}', '_blank');">
+                            Lihat <i class="fas fa-eye"></i>
+                            </button>
+                            {% else %}
+                             <p style="text-align: center;">Tidak Ada</p>
+                            {% endif %}
+                            </td>
+                        </tr>
+    
+                        
+    <tr>
+        <td>5</td>
+        <td>
+        <strong>Biodata Pengurus</strong><br>
+        Biodata pengurus organisasi ketua, sekretaris dan bendahara atau sebutan lainnya
+        </td>
+        <td>
+        {% if dokumen.biodata_pengurus %}
+        <button type="button" class="btn view" onclick="window.open('{{ dokumen.biodata_pengurus.url }}', '_blank');">
+        Lihat <i class="fas fa-eye"></i>
+        </button>
+        {% else %}
+         <p style="text-align: center;">Tidak Ada</p>
+        {% endif %}
+        </td>
+        </tr>
+    
+    
+        <tr>
+            <td>6</td>
+            <td>
+            <strong>Foto Pengurus</strong><br>
+            6 Pas foto pengurus organisasi berwarna ukuran 4 X 6 terbaru dalam 3 (tiga) bulan terakhir, ketua, sekretaris dan bendahara atau sebutan lainnya
+            </td>
+            <td>
+            {% if dokumen.foto_pengurus %}
+            <button type="button" class="btn view" onclick="window.open('{{ dokumen.foto_pengurus.url }}', '_blank');">
+            Lihat <i class="fas fa-eye"></i>
+            </button>
+            {% else %}
+             <p style="text-align: center;">Tidak Ada</p>
+            {% endif %}
+            </td>
+            </tr>
+    
+            <tr>
+                <td>7</td>
+                <td>
+                <strong>KTP Pengurus</strong><br>
+                Fotocopy kartu tanda penduduk elektronik pengurus organisasi ketua, sekretaris dan bendahara atau sebutan lainnya
+                </td>
+                <td>
+                {% if dokumen.ktp_pengurus %}
+                <button type="button" class="btn view" onclick="window.open('{{ dokumen.ktp_pengurus.url }}', '_blank');">
+                Lihat <i class="fas fa-eye"></i>
+                </button>
+                {% else %}
+                 <p style="text-align: center;">Tidak Ada</p>
+                {% endif %}
+                </td>
+                </tr>
+        
+                <tr>
+                    <td>8</td>
+                    <td>
+                    <strong>NPWP Pengurus</strong><br>
+                    Nomow Pokok Wajib Pajak atas nama ormas.
+                    </td>
+                    <td>
+                    {% if dokumen.npwp_pengurus %}
+                    <button type="button" class="btn view" onclick="window.open('{{ dokumen.npwp_pengurus.url }}', '_blank');">
+                    Lihat <i class="fas fa-eye"></i>
+                    </button>
+                    {% else %}
+                     <p style="text-align: center;">Tidak Ada</p>
+                    {% endif %}
+                    </td>
+                    </tr>
+    
+                    <tr>
+                        <td>9</td>
+                        <td>
+                        <strong>Surat Keterangan Domisili Ormas</strong><br>
+                        Surat keterangan domisili kantor/sekretariat ormas yang diterbitkan oleh lurah/kepala desa setempat atau sebutan lainnya
+                        </td>
+                        <td>
+                        {% if dokumen.surat_domisili %}
+                        <button type="button" class="btn view" onclick="window.open('{{ dokumen.surat_domisili.url }}', '_blank');">
+                        Lihat <i class="fas fa-eye"></i>
+                        </button>
+                        {% else %}
+                         <p style="text-align: center;">Tidak Ada</p>
+                        {% endif %}
+                        </td>
+                        </tr>
+    
+                        <tr>
+                            <td>10</td>
+                            <td>
+                            <strong>Surat Kepemilikan / Kontrak Gedung</strong><br>
+                            Surat bukti kepemilikan atau perjanjian kontrak atau ijin pakai dari pemilik pengelola gedung
+                            </td>
+                            <td>
+                            {% if dokumen.surat_kepemilikan_gedung %}
+                            <button type="button" class="btn view" onclick="window.open('{{ dokumen.surat_kepemilikan_gedung.url }}', '_blank');">
+                            Lihat <i class="fas fa-eye"></i>
+                            </button>
+                            {% else %}
+                             <p style="text-align: center;">Tidak Ada</p>
+                            {% endif %}
+                            </td>
+                            </tr>
+    
+                            <tr>
+                                <td>11</td>
+                                <td>
+                                <strong>Foto Kantor / Sekretariat</strong><br>
+                                Foto kantor atau kantor/sekretariat ormas tampak depan yang memuat papan nama
+                                </td>
+                                <td>
+                                {% if dokumen.foto_kantor %}
+                                <button type="button" class="btn view" onclick="window.open('{{ dokumen.foto_kantor.url }}', '_blank');">
+                                Lihat <i class="fas fa-eye"></i>
+                                </button>
+                                {% else %}
+                                 <p style="text-align: center;">Tidak Ada</p>
+                                {% endif %}
+                                </td>
+                                </tr>
+    
+                                <tr>
+                                    <td>12</td>
+                                    <td>
+                                    <strong>Surat pernyataan tidak dalam sengketa kepengurusan atau tidak dalam perkara di pengadilan</strong><br>
+                                    </td>
+                                    <td>
+                                    {% if dokumen.surat_tidak_sengketa %}
+                                    <button type="button" class="btn view" onclick="window.open('{{ dokumen.surat_tidak_sengketa.url }}', '_blank');">
+                                    Lihat <i class="fas fa-eye"></i>
+                                    </button>
+                                    {% else %}
+                                     <p style="text-align: center;">Tidak Ada</p>
+                                    {% endif %}
+                                    </td>
+                                    </tr>
+    
+                                    <tr>
+                                        <td>13</td>
+                                        <td>
+                                        <strong>Surat Pernyataan Kesanggupan Melaporkan Kegiatan</strong><br>
+                                        </td>
+                                        <td>
+                                        {% if dokumen.surat_pernyataan_kesanggupan %}
+                                        <button type="button" class="btn view" onclick="window.open('{{ dokumen.surat_pernyataan_kesanggupan.url }}', '_blank');">
+                                        Lihat <i class="fas fa-eye"></i>
+                                        </button>
+                                        {% else %}
+                                         <p style="text-align: center;">Tidak Ada</p>
+                                        {% endif %}
+                                        </td>
+                                        </tr>
+    
+                                        <tr>
+                                            <td>14</td>
+                                            <td>
+                                            <strong>Surat Pernyataan Tidak Terikat Partai Politik</strong><br>
+                                            Surat pernyataan tidak berafiliasi secara kelembagaan dengan partai politik yang ditandatangani oleh ketua dan sekretaris
+                                            </td>
+                                            <td>
+                                            {% if dokumen.surat_tidak_terkait_politik %}
+                                            <button type="button" class="btn view" onclick="window.open('{{ dokumen.surat_tidak_terkait_politik.url }}', '_blank');">
+                                            Lihat <i class="fas fa-eye"></i>
+                                            </button>
+                                            {% else %}
+                                             <p style="text-align: center;">Tidak Ada</p>
+                                            {% endif %}
+                                            </td>
+                                            </tr>
+    
+                                            <tr>
+                                                <td>15</td>
+                                                <td>
+                                                <strong>Surat Pernyataan Hak Paten   </strong><br>
+                                                Surat pernyataan atau nama, lambang, bendera, tanda, gambar, symbol, atribut dan cap stempel yang digunakan belum menjadi hak paten dan atau hak cipta pihak lain serta bukan merupakan milik pemerintah yang ditandatangani oleh ketua dan sekteraris
+                                                </td>
+                                                <td>
+                                                {% if dokumen.surat_pernyataan_hak_paten %}
+                                                <button type="button" class="btn view" onclick="window.open('{{ dokumen.surat_pernyataan_hak_paten.url }}', '_blank');">
+                                                Lihat <i class="fas fa-eye"></i>
+                                                </button>
+                                                {% else %}
+                                                 <p style="text-align: center;">Tidak Ada</p>
+                                                {% endif %}
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>16</td>
+                                                    <td>
+                                                    <strong>Surat Rekomendasi 1</strong><br>
+                                                    Rekomendasi dari kementrian yang melaksanakan urusan di bidang agama untuk ormas yang memiliki kekhususan di bidang keagamaan dan bagi ormas yang bergerak di bidang-bidang lain misalnya; pendidikan non formal, pertanian, perikanan, social, lingkungan dan lain-lain harus mendapatkan rekomendasi dari instansi terkait
+                                                    </td>
+                                                    <td>
+                                                    {% if dokumen.surat_rekomendasi_satu %}
+                                                    <button type="button" class="btn view" onclick="window.open('{{ dokumen.surat_rekomendasi_satu.url }}', '_blank');">
+                                                    Lihat <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    {% else %}
+                                                     <p style="text-align: center;">Tidak Ada</p>
+                                                    {% endif %}
+                                                    </td>
+                                                    </tr>
+        
+                                                    <tr>
+                                                        <td>17</td>
+                                                        <td>
+                                                        <strong>Surat Rekomendasi 2</strong><br>
+                                                        Rekomendari dari kementrian atau perangkat daerah yang membidangi urusan kebudayaan untuk ormas yang memiliki kekhususan bidang kepercayaan pada Tuhan yang Maha Esa
+                                                        </td>
+                                                        <td>
+                                                        {% if dokumen.surat_rekomendasi_dua %}
+                                                        <button type="button" class="btn view" onclick="window.open('{{ dokumen.surat_rekomendasi_dua.url }}', '_blank');">
+                                                        Lihat <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        {% else %}
+                                                        <p style="text-align: center;">Tidak Ada</p>
+                                                        {% endif %}
+                                                        </td>
+                                                        </tr>
+            
+    
+    <tr>
+    <td>18</td>
+    <td>
+    <strong>Surat Pernyataan Pejabat</strong><br>
+    Surat pernyataan kesediaan atau persetujuan dari pejabat Negara, pejabat pemerintah dan atau tokoh masyarakat yang bersangkutan yang namanya di cantumkan dalam pengurusan ormas
+    </td>
+    <td>
+    {% if dokumen.surat_pernyataan_pejabat %}
+    <button type="button" class="btn view" onclick="window.open('{{ dokumen.surat_pernyataan_pejabat.url }}', '_blank');">
+    Lihat <i class="fas fa-eye"></i>
+    </button>
+    {% else %}
+     <p style="text-align: center;">Tidak Ada</p>
+    {% endif %}
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    <div class="verifikasi">
+        <form method="POST" action="{% url 'view_pengajuan' register.id %}">
+            {% csrf_token %}
+            <label>
+                <input type="checkbox" name="view_pengajuan" id="verifikasiCheckbox" {% if register.is_verified %}checked disabled{% endif %}>
+                Verifikasi Register
+            </label>
+            
+            <button type="submit" class="tombol-acc" id="submitButton" {% if register.is_verified %}disabled{% endif %}>
+                Submit Verifikasi
+            </button>
+        </form>
+    </div>
+    
+
+</div>
+    <div class="footer">
+        © 2023 - [Padinusantara.com]
+    </div>
+</div>
+</section>
+</main>
+</div>
+<script>
+    // Ambil elemen checkbox dan tombol submit
+    const checkbox = document.getElementById('verifikasiCheckbox');
+    const submitButton = document.getElementById('submitButton');
+
+    // Fungsi untuk mengaktifkan/mematikan tombol submit berdasarkan status checkbox
+    function toggleSubmitButton() {
+        submitButton.disabled = !checkbox.checked;
+    }
+
+    // Panggil fungsi saat checkbox diubah
+    checkbox.addEventListener('change', toggleSubmitButton);
+
+    // Inisialisasi status tombol submit saat halaman dimuat
+    toggleSubmitButton();
+</script>
+<script src="{% static '/js/Modal.js' %}?v={{ STATIC_VERSION }}"></script>
+{% endblock %}
+</body>
+</html>
+
+

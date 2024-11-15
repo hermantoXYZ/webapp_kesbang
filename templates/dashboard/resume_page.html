@@ -1,0 +1,419 @@
+{% extends 'dashboard/base_form.html' %}
+{%block title%}Login User{%endblock%}
+{%block content%}
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+
+<div class="service-container-form">
+    <div class="tabs">
+        <a href="{% url 'edit_pemohon' register_id=register_id %}" class="tab">Pemohon</a>
+        <a href="{% url 'edit_organisasi' register_id=register_id %}" class="tab">Organisasi</a>
+        <a href="{% url 'edit_pengurus' register_id=register_id %}" class="tab">Pengurus</a>
+        <a href="{% url 'edit_dokumen' register_id=register_id %}" class="tab">Dokumen</a>
+        <a href="/" class="tab active">Resume</a> <!-- Tambahkan pola URL sesuai kebutuhan -->
+    </div>
+    <div class="content">
+        <div class="column">
+            <div class="info">
+                <h1>Data Pemohon</h1>
+                <table>
+                    <tr><th>Surat Permohonan SKT</th><td>{% if surat_permohonan_skt %}
+                        <button type="button" class="btn view" onclick="window.open('{{ surat_permohonan_skt.url }}', '_blank');">
+                        Lihat <i class="fas fa-eye"></i>
+                        </button>
+                        {% else %}
+                         <p style="text-align: center;">Tidak Ada</p>
+                        {% endif %}</td></tr>
+                    <tr><th>Nomor Surat</th><td>{{ pemohon.nomor_surat }}</td></tr>
+                    <tr><th>Nama Notaris</th><td>{{ organisasi.nama_notaris }}</td></tr>
+                    <tr><th>Nomor Akta</th><td>{{ organisasi.nomor_akta }}</td></tr>
+                    <tr><th>Tanggal Akta</th><td>{{ organisasi.tanggal_akta }}</td></tr>
+                    <tr><th>Nama Organisasi</th><td>{{ organisasi.nama_organisasi }}</td></tr>
+                    <tr><th>Bidang Kegiatan</th><td>{{ organisasi.bidang_kegiatan }}</td></tr>
+                    <tr><th>Alamat Kantor</th><td>{{ organisasi.alamat_kantor }}</td></tr>
+                    <tr><th>Tempat Pendirian</th><td>{{ organisasi.tempat_pendirian }}</td></tr>
+                    <tr><th>Tanggal Pendirian</th><td>{{ organisasi.tanggal_pendirian }}</td></tr>
+                    <tr><th>Asas Ciri Organisasi</th><td>{{ organisasi.asas_ciri_organisasi }}</td></tr>
+                    <tr><th>Tujuan Organisasi</th><td>{{ organisasi.tujuan_organisasi }}</td></tr>
+                    <tr><th>Masa Bakti Kepengurusan</th><td>{{ organisasi.masa_bakti_kepengurusan }}</td></tr>
+                    <tr><th>Keputusan Tertinggi Organisasi</th><td>{{ organisasi.keputusan_tertinggi_organisasi }}</td></tr>
+                </table>
+            </div>
+        </div>
+    
+        <div class="column">
+            <div class="info">
+                <h1>Organisasi</h1>
+                <table>
+                    <tr><th>Unit Cabang</th><td>{{ organisasi.unit_cabang }}</td></tr>
+                    <tr><th>NPWP</th><td>{{ organisasi.npwp }}</td></tr>
+                    <tr><th>Sumber Keuangan</th><td>{{ organisasi.sumber_keuangan }}</td></tr>
+                    <tr><th>Lambang Logo</th><td>{% if lambang_logo %}
+                        <button type="button" class="btn view" onclick="window.open('{{ lambang_logo.url }}', '_blank');">
+                        Lihat <i class="fas fa-eye"></i>
+                        </button>
+                        {% else %}
+                        <p style="text-align: center;">Tidak Ada</p>
+                        {% endif %}</td></tr>
+                    <tr><th>Bendera</th><td>{% if bendera %}
+                        <button type="button" class="btn view" onclick="window.open('{{ bendera.url }}', '_blank');">
+                        Lihat <i class="fas fa-eye"></i>
+                        </button>
+                        {% else %}
+                        <p style="text-align: center;">Tidak Ada</p>
+                        {% endif %}</td></tr>
+                    <tr><th>Nama Pembina</th><td>{{ pengurus.nama_pembina }}</td></tr>
+                    <tr><th>Nama Penasehat</th><td>{{ pengurus.nama_penasehat }}</td></tr>
+                    <tr><th>Nama Ketua</th><td>{{ pengurus.nama_ketua }}</td></tr>
+                    <tr><th>Nama Sekretaris</th><td>{{ pengurus.nama_sekretaris }}</td></tr>
+                    <tr><th>Nama Bendahara</th><td>{{ pengurus.nama_bendahara }}</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <table class="document-table">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Syarat Dokumen</th>
+                    <th>File</th>
+                </tr>
+            </thead>
+            <tbody>
+           
+    
+
+
+                <tr>
+                    <td>1</td>
+                    <td>
+                    <strong>Akta Notaris</strong><br>
+                    Salinan/fotocopy Akta Pendiri Ormas (dari Notaris) yang memuat Anggaran Dasar (AD) atau Anggaran Rumah Tangga (ART) </td>
+                    <td>
+                    {% if akta_notaris %}
+                    <button type="button" class="btn view" onclick="window.open('{{ akta_notaris.url }}', '_blank');">
+                    Lihat <i class="fas fa-eye"></i>
+                    </button>
+                    {% else %}
+                     <p style="text-align: center;">Tidak Ada</p>
+                    {% endif %}
+                    </td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>
+                        <strong>AD/ART</strong><br>
+                        Anggaran Dasar (AD), Anggaran Rumah Tangga (ART) (Memuat Paling Sedikit Nama Dan Lambang, Tempat Kedudukan, Asas Atau Tujuan, Dan Fungsi, Kepengurusan, Hak Dan Kewajiban Anggota, Pengelolaan Keuangan, Mekanisme Penyelesaian Sengketa Dan Pengawasan Internal, Dan Pembubaran Organisasi)
+                        </td>
+                        <td>
+                        {% if ad_art %}
+                        <button type="button" class="btn view" onclick="window.open('{{ ad_art.url }}', '_blank');">
+                        Lihat <i class="fas fa-eye"></i>
+                        </button>
+                        {% else %}
+                         <p style="text-align: center;">Tidak Ada</p>
+                        {% endif %}
+                        </td>
+                        </tr>
+
+                    <tr>
+                        <td>3</td>
+                        <td>
+                        <strong>Program Kerja</strong><br>
+                        </td>
+                        <td>
+                        {% if program_kerja %}
+                        <button type="button" class="btn view" onclick="window.open('{{ program_kerja.url }}', '_blank');">
+                        Lihat <i class="fas fa-eye"></i>
+                        </button>
+                        {% else %}
+                         <p style="text-align: center;">Tidak Ada</p>
+                        {% endif %}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>4</td>
+                        <td>
+                        <strong>Struktur Organisasi</strong><br>
+                        Susunan pengurus yang dibuktikan dengan surat keputusan tentang susunan pengurus ormas secara lengkap yang sah sesuai dengan AD/ART ormas yang memuat paling sedikit Ketua, Sekretaris dan Bendahara atau sebutan lain pengurus dan anggota kesemuanya berkewarganegaraan Indonesia tanpa terkecuali
+                        </td>
+                        <td>
+                        {% if struktur_organisasi %}
+                        <button type="button" class="btn view" onclick="window.open('{{ struktur_organisasi.url }}', '_blank');">
+                        Lihat <i class="fas fa-eye"></i>
+                        </button>
+                        {% else %}
+                         <p style="text-align: center;">Tidak Ada</p>
+                        {% endif %}
+                        </td>
+                    </tr>
+
+                    
+<tr>
+    <td>5</td>
+    <td>
+    <strong>Biodata Pengurus</strong><br>
+    Biodata pengurus organisasi ketua, sekretaris dan bendahara atau sebutan lainnya
+    </td>
+    <td>
+    {% if biodata_pengurus %}
+    <button type="button" class="btn view" onclick="window.open('{{ biodata_pengurus.url }}', '_blank');">
+    Lihat <i class="fas fa-eye"></i>
+    </button>
+    {% else %}
+     <p style="text-align: center;">Tidak Ada</p>
+    {% endif %}
+    </td>
+    </tr>
+
+
+    <tr>
+        <td>6</td>
+        <td>
+        <strong>Foto Pengurus</strong><br>
+        6 Pas foto pengurus organisasi berwarna ukuran 4 X 6 terbaru dalam 3 (tiga) bulan terakhir, ketua, sekretaris dan bendahara atau sebutan lainnya
+        </td>
+        <td>
+        {% if foto_pengurus %}
+        <button type="button" class="btn view" onclick="window.open('{{ foto_pengurus.url }}', '_blank');">
+        Lihat <i class="fas fa-eye"></i>
+        </button>
+        {% else %}
+         <p style="text-align: center;">Tidak Ada</p>
+        {% endif %}
+        </td>
+        </tr>
+
+        <tr>
+            <td>7</td>
+            <td>
+            <strong>KTP Pengurus</strong><br>
+            Fotocopy kartu tanda penduduk elektronik pengurus organisasi ketua, sekretaris dan bendahara atau sebutan lainnya
+            </td>
+            <td>
+            {% if ktp_pengurus %}
+            <button type="button" class="btn view" onclick="window.open('{{ ktp_pengurus.url }}', '_blank');">
+            Lihat <i class="fas fa-eye"></i>
+            </button>
+            {% else %}
+             <p style="text-align: center;">Tidak Ada</p>
+            {% endif %}
+            </td>
+            </tr>
+    
+            <tr>
+                <td>8</td>
+                <td>
+                <strong>NPWP Pengurus</strong><br>
+                Nomow Pokok Wajib Pajak atas nama ormas.
+                </td>
+                <td>
+                {% if npwp_pengurus %}
+                <button type="button" class="btn view" onclick="window.open('{{ npwp_pengurus.url }}', '_blank');">
+                Lihat <i class="fas fa-eye"></i>
+                </button>
+                {% else %}
+                 <p style="text-align: center;">Tidak Ada</p>
+                {% endif %}
+                </td>
+                </tr>
+
+                <tr>
+                    <td>9</td>
+                    <td>
+                    <strong>Surat Keterangan Domisili Ormas</strong><br>
+                    Surat keterangan domisili kantor/sekretariat ormas yang diterbitkan oleh lurah/kepala desa setempat atau sebutan lainnya
+                    </td>
+                    <td>
+                    {% if surat_domisili %}
+                    <button type="button" class="btn view" onclick="window.open('{{ surat_domisili.url }}', '_blank');">
+                    Lihat <i class="fas fa-eye"></i>
+                    </button>
+                    {% else %}
+                     <p style="text-align: center;">Tidak Ada</p>
+                    {% endif %}
+                    </td>
+                    </tr>
+
+                    <tr>
+                        <td>10</td>
+                        <td>
+                        <strong>Surat Kepemilikan / Kontrak Gedung</strong><br>
+                        Surat bukti kepemilikan atau perjanjian kontrak atau ijin pakai dari pemilik pengelola gedung
+                        </td>
+                        <td>
+                        {% if surat_kepemilikan_gedung %}
+                        <button type="button" class="btn view" onclick="window.open('{{ surat_kepemilikan_gedung.url }}', '_blank');">
+                        Lihat <i class="fas fa-eye"></i>
+                        </button>
+                        {% else %}
+                         <p style="text-align: center;">Tidak Ada</p>
+                        {% endif %}
+                        </td>
+                        </tr>
+
+                        <tr>
+                            <td>11</td>
+                            <td>
+                            <strong>Foto Kantor / Sekretariat</strong><br>
+                            Foto kantor atau kantor/sekretariat ormas tampak depan yang memuat papan nama
+                            </td>
+                            <td>
+                            {% if foto_kantor %}
+                            <button type="button" class="btn view" onclick="window.open('{{ foto_kantor.url }}', '_blank');">
+                            Lihat <i class="fas fa-eye"></i>
+                            </button>
+                            {% else %}
+                             <p style="text-align: center;">Tidak Ada</p>
+                            {% endif %}
+                            </td>
+                            </tr>
+
+                            <tr>
+                                <td>12</td>
+                                <td>
+                                <strong>Surat pernyataan tidak dalam sengketa kepengurusan atau tidak dalam perkara di pengadilan</strong><br>
+                                </td>
+                                <td>
+                                {% if surat_tidak_sengketa %}
+                                <button type="button" class="btn view" onclick="window.open('{{ surat_tidak_sengketa.url }}', '_blank');">
+                                Lihat <i class="fas fa-eye"></i>
+                                </button>
+                                {% else %}
+                                 <p style="text-align: center;">Tidak Ada</p>
+                                {% endif %}
+                                </td>
+                                </tr>
+
+                                <tr>
+                                    <td>13</td>
+                                    <td>
+                                    <strong>Surat Pernyataan Kesanggupan Melaporkan Kegiatan</strong><br>
+                                    </td>
+                                    <td>
+                                    {% if surat_pernyataan_kesanggupan %}
+                                    <button type="button" class="btn view" onclick="window.open('{{ surat_pernyataan_kesanggupan.url }}', '_blank');">
+                                    Lihat <i class="fas fa-eye"></i>
+                                    </button>
+                                    {% else %}
+                                     <p style="text-align: center;">Tidak Ada</p>
+                                    {% endif %}
+                                    </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>14</td>
+                                        <td>
+                                        <strong>Surat Pernyataan Tidak Terikat Partai Politik</strong><br>
+                                        Surat pernyataan tidak berafiliasi secara kelembagaan dengan partai politik yang ditandatangani oleh ketua dan sekretaris
+                                        </td>
+                                        <td>
+                                        {% if surat_tidak_terkait_politik %}
+                                        <button type="button" class="btn view" onclick="window.open('{{ surat_tidak_terkait_politik.url }}', '_blank');">
+                                        Lihat <i class="fas fa-eye"></i>
+                                        </button>
+                                        {% else %}
+                                         <p style="text-align: center;">Tidak Ada</p>
+                                        {% endif %}
+                                        </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>15</td>
+                                            <td>
+                                            <strong>Surat Pernyataan Hak Paten   </strong><br>
+                                            Surat pernyataan atau nama, lambang, bendera, tanda, gambar, symbol, atribut dan cap stempel yang digunakan belum menjadi hak paten dan atau hak cipta pihak lain serta bukan merupakan milik pemerintah yang ditandatangani oleh ketua dan sekteraris
+                                            </td>
+                                            <td>
+                                            {% if surat_pernyataan_hak_paten %}
+                                            <button type="button" class="btn view" onclick="window.open('{{ surat_pernyataan_hak_paten.url }}', '_blank');">
+                                            Lihat <i class="fas fa-eye"></i>
+                                            </button>
+                                            {% else %}
+                                             <p style="text-align: center;">Tidak Ada</p>
+                                            {% endif %}
+                                            </td>
+                                            </tr>
+                                            <tr>
+                                                <td>16</td>
+                                                <td>
+                                                <strong>Surat Rekomendasi 1</strong><br>
+                                                Rekomendasi dari kementrian yang melaksanakan urusan di bidang agama untuk ormas yang memiliki kekhususan di bidang keagamaan dan bagi ormas yang bergerak di bidang-bidang lain misalnya; pendidikan non formal, pertanian, perikanan, social, lingkungan dan lain-lain harus mendapatkan rekomendasi dari instansi terkait
+                                                </td>
+                                                <td>
+                                                {% if surat_rekomendasi_satu %}
+                                                <button type="button" class="btn view" onclick="window.open('{{ surat_rekomendasi_satu.url }}', '_blank');">
+                                                Lihat <i class="fas fa-eye"></i>
+                                                </button>
+                                                {% else %}
+                                                 <p style="text-align: center;">Tidak Ada</p>
+                                                {% endif %}
+                                                </td>
+                                                </tr>
+    
+                                                <tr>
+                                                    <td>17</td>
+                                                    <td>
+                                                    <strong>Surat Rekomendasi 2</strong><br>
+                                                    Rekomendari dari kementrian atau perangkat daerah yang membidangi urusan kebudayaan untuk ormas yang memiliki kekhususan bidang kepercayaan pada Tuhan yang Maha Esa
+                                                    </td>
+                                                    <td>
+                                                    {% if surat_rekomendasi_dua %}
+                                                    <button type="button" class="btn view" onclick="window.open('{{ surat_rekomendasi_dua.url }}', '_blank');">
+                                                    Lihat <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    {% else %}
+                                                    <p style="text-align: center;">Tidak Ada</p>
+                                                    {% endif %}
+                                                    </td>
+                                                    </tr>
+        
+
+<tr>
+<td>18</td>
+<td>
+<strong>Surat Pernyataan Pejabat</strong><br>
+Surat pernyataan kesediaan atau persetujuan dari pejabat Negara, pejabat pemerintah dan atau tokoh masyarakat yang bersangkutan yang namanya di cantumkan dalam pengurusan ormas
+</td>
+<td>
+{% if surat_pernyataan_pejabat %}
+<button type="button" class="btn view" onclick="window.open('{{ surat_pernyataan_pejabat.url }}', '_blank');">
+Lihat <i class="fas fa-eye"></i>
+</button>
+{% else %}
+ <p style="text-align: center;">Tidak Ada</p>
+{% endif %}
+</td>
+</tr>
+</tbody>
+</table>
+
+      <!-- resume_page.html -->
+
+    {% if register.is_completed %}
+      <div class="alert alert-warning">
+          <strong>Peringatan!</strong> Setelah pendaftaran diakhiri, ajuan permohonan tidak dapat diubah lagi.
+      </div>
+  {% endif %}
+  <form action="{% url 'akhiri_pendaftaran' register.id %}" method="post">
+      {% csrf_token %}
+      {% if not register.is_completed %}
+          <button type="submit" class="submit-button">Akhiri Pendaftaran</button>
+      {% endif %}
+  </form>
+</div>
+{%endblock%}

@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Start Meta Tag -->
+    <meta name="title" content="SKT">
+    <meta name="description" content="SKT">
+    <meta name="keywords" content="SKT">
+    <!-- Facebook -->
+    <meta property="og:title" content="SKT">
+    <meta property="og:description" content="SKT">
+    <meta property="og:image" content="URL_GAMBAR_THUMBNAIL">
+    <meta property="og:url" content="https://www.app.com">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SKT">
+    <meta name="twitter:description" content="SKT">
+    <meta name="twitter:image" content="URL_GAMBAR_THUMBNAIL">
+    <!-- End Meta Tag -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'dashboard/styles.css' %}?v={{ STATIC_VERSION }}">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/media/logo/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/media/logo/favicon/favicon-16x16.png"/>
+    
+</head>
+<body>
+<div class="dashboard">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="{% url 'pemohon' %}"><img src="/media/logo/logoipsum-325.svg" class="logo-dashboard" alt="Logo"></a>
+                <a href="#" class="close-btn" id="close-btn"><i class="fas fa-times"></i></a>
+            </div>
+            <!-- Sidebar Navbar -->
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="/">
+                        {% if request.user.is_staff %}
+                            <!-- Link for staff users -->
+                            <a href="{% url 'dashboard_staff' %}"><i class="fas fa-home"></i>Dashboard</a>
+                        {% else %}
+                            <!-- Link for regular users -->
+                            <a href="{% url 'dashboard_pelanggan' %}"><i class="fas fa-home"></i> Dashboard</a>
+                        {% endif %}
+                    </li>
+                    <li class="/">
+                        {% if request.user.is_staff %}
+                            <!-- Link for staff users -->
+                        <a href="{% url 'list_pengajuan' %}"><i class="fa fa-paper-plane"></i>Daftar Ajuan SKT</a>
+                        {% else %}
+                            <!-- Link for regular users -->
+                        <a href="{% url 'register_list' %}"><i class="fa fa-paper-plane"></i>Daftar Ajuan SKT</a>
+                        {% endif %}
+                    </li>
+                    <li class="/">
+                        {% if request.user.is_staff %}
+                            <!-- Link for staff users -->
+                        <a href="{% url 'dashboard_terverifikasi' %}"><i class="fas fa-check-double"></i>Terverifikasi</a>
+                        {% else %}
+                            <!-- Link for regular users -->
+                        {% endif %}
+                    </li>
+                    <li class="/">
+                        {% if request.user.is_staff %}
+                            <!-- Link for staff users -->
+                        <a href="{% url 'dashboard_unverified' %}"><i class="fas fa-check-double"></i>Unverified</a>
+                        {% else %}
+                            <!-- Link for regular users -->
+                        {% endif %}
+                    </li>
+                </ul>
+                <h3>Account Pages</h3>
+                <ul>
+                    <li class="/">
+                        {% if request.user.is_staff %}
+                            <!-- Link for staff users -->
+                        <a href="{% url 'profile_staff' %}"><i class="fas fa-user"></i> Profile</a>
+                        {% else %}
+                            <!-- Link for regular users -->
+                        <a href="{% url 'profile' %}"><i class="fas fa-user"></i> Profile</a>
+                        {% endif %}
+                    </li>
+                    <li class="/">
+                        <a href="{% url 'logout' %}"><i class="fas fa-sign-in-alt"></i> Sign Out</a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- Sidebar Navbar -->
+        </aside>
+{%block content%}
+{%endblock%}
+<script src="{% static '/js/dashboard/SidebarToggle.js' %}?v={{ STATIC_VERSION }}"></script>
+<script src="{% static '/js/dashboard/ModalEdit.js' %}?v={{ STATIC_VERSION }}"></script>
+</body>
+</html>

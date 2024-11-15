@@ -1,0 +1,38 @@
+{% extends 'documents/base.html' %}
+{% block title %}Home Invitekucom{% endblock %}
+  {% block content %}
+  <div id="content" role="main">
+	<div class="idocs-navigation bg-light">
+      <ul class="nav flex-column ">
+        <li class="nav-item"><a class="nav-link active" href="#{{ document.category.name }}">{{ category.name }}</a>
+            <ul class="nav flex-column">
+                {% for tag in document.tags.all %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#{{ tag.slug }}">{{ tag.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="idocs-content">
+      <div class="container"> 
+        <section id="{{ document.category.name }}">
+        <h1>Post in Category {{ category.name }}</h1>
+        <ol>
+          {% for post in posts %}
+            <li>
+              <a href="{% url 'document_detail' post.slug %}">{{ post.title }}</a>
+            </li>
+          {% empty %}
+            <li>No posts available in this category.</li>
+          {% endfor %}
+        </ol>
+		<hr>
+        <p class="alert alert-info">If you have any questions that are beyond the scope of this help file, Please feel free to email via</p>
+        </section> 
+		<hr class="divider">
+      </div>
+    </div>
+  </div>
+  {% endblock %}
