@@ -89,9 +89,15 @@ def create_register(request):
             register = form.save(commit=False)  # Save the form without committing to the database yet
             register.author = request.user  # Set the author to the current logged-in user
             register.save()  # Now save the form data to the database
+            messages.success(request, "Dokumen berhasil diunggah.")
             return redirect('register_list')
+        else:
+            form = RegisterForm()
+            messages.error(request, "Terjadi kesalahan saat mengunggah dokumen. Pastikan ukuran file tidak melebihi batas.")
+
     else:
         form = RegisterForm()
+        
     return render(request, 'accounts/register_skt.html', {'form': form})
 
 
