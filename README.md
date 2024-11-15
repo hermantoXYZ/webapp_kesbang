@@ -6,7 +6,6 @@ This repository, `webapp_kesbang`, is a web application built using Django as th
 - [Features](#features)
 - [Login](#login)
 - [Register](#register)
-
 ---
 
 ## Features
@@ -54,14 +53,9 @@ This repository, `webapp_kesbang`, is a web application built using Django as th
 ![Kesbang](https://github.com/hermantoXYZ/webapp_kesbang/blob/main/gambar/127.0.0.1_8000_dashboard_unverified_.png)
 
 ## Verifikasi Permohonan
-![Kesbang](https://github.com/hermantoXYZ/webapp_kesbang/blob/main/gambar/127.0.0.1_8000_staff_view_4e14789f-dc1c-452e-9dff-63c0f75f20a8_.png)
 ![Kesbang](https://github.com/hermantoXYZ/webapp_kesbang/blob/main/gambar/127.0.0.1_8000_staff_view_3962267b-bfe5-4ee0-a4da-08a27d61d6b9_.png)
 
 
-
-## Installation
-
-To set up the project locally, follow these steps:
 
 ### Prerequisites
 
@@ -70,8 +64,3 @@ To set up the project locally, follow these steps:
 - [Django Python](https://django.com)
 
 ### Backend Setup (Django)
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/hermantoXYZ/webapp_kesbang.git
-   cd webapp_kesbang
